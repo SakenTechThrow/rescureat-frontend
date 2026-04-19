@@ -1,6 +1,7 @@
 import Link from "next/link";
 import StatCard from "@/components/StatCard";
 import DeleteListingButton from "@/components/DeleteListingButton";
+import { apiUrl } from "@/lib/apiBase";
 
 type Deal = {
   id: number;
@@ -12,7 +13,7 @@ type Deal = {
 };
 
 async function getDeals(): Promise<Deal[]> {
-  const res = await fetch("http://localhost:8080/api/deals", {
+  const res = await fetch(apiUrl("/api/deals"), {
     cache: "no-store",
   });
 
@@ -102,4 +103,3 @@ export default async function CafeDashboardPage() {
     </main>
   );
 }
-

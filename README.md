@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Create `.env.local` (optional for local dev, required for deployment environments):
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+Frontend API calls use `NEXT_PUBLIC_API_URL` and fall back to `http://localhost:8080` when not set.
+
 First, run the development server:
 
 ```bash
