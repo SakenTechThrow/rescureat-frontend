@@ -1,3 +1,5 @@
+import { apiUrl } from "@/lib/apiBase";
+
 /**
  * Client-only auth helpers (JWT + role in localStorage).
  * Only call from browser code (Client Components / event handlers).
@@ -144,7 +146,7 @@ export async function readApiErrorMessage(res: Response): Promise<string> {
   return parseErrorFromText(text);
 }
 
-const AUTH_API = "http://localhost:8080/api/auth";
+const AUTH_API = apiUrl("/api/auth");
 
 export type RegisterApiRole = "STUDENT" | "CAFE_OWNER";
 

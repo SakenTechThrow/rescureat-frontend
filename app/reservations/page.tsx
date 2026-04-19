@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { authHeaders, readApiErrorMessage } from "@/lib/auth";
+import { apiUrl } from "@/lib/apiBase";
 
 type Reservation = {
   id: number;
@@ -34,7 +35,7 @@ export default function ReservationsPage() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://localhost:8080/api/reservations", {
+        const res = await fetch(apiUrl("/api/reservations"), {
           method: "GET",
           headers,
           cache: "no-store",
