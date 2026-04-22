@@ -144,7 +144,7 @@ export async function readApiErrorMessage(res: Response): Promise<string> {
   return parseErrorFromText(text);
 }
 
-const AUTH_API = "http://localhost:8080/api/auth";
+const AUTH_API = "https://rescureat-backend-production.up.railway.app";
 
 export type RegisterApiRole = "STUDENT" | "CAFE_OWNER";
 
