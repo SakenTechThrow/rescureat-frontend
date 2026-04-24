@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authHeaders, readApiErrorMessage } from "@/lib/auth";
+import { apiUrl } from "@/lib/apiBase";
 
 type DeleteListingButtonProps = {
   dealId: number;
@@ -30,7 +31,7 @@ export default function DeleteListingButton({
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:8080/api/deals/${dealId}`, {
+      const res = await fetch(apiUrl(`/api/deals/${dealId}`), {
         method: "DELETE",
         headers: authHeaders(),
       });

@@ -34,7 +34,7 @@ All four requested protected actions do call `authHeaders()`:
 Important nuance: these calls include Bearer token only if token exists in localStorage; there is no frontend hard stop before calling.
 
 ### SSR / App Router pitfalls currently present
-- Server components (`/deals`, `/deals/[id]`, `/dashboard/cafe`) call backend using hardcoded `http://localhost:8080`. In production SSR, this often breaks unless backend is reachable from Vercel runtime.
+- Server components (`/deals`, `/deals/[id]`, `/dashboard/cafe`) call backend using hardcoded `<api-base-url>`. In production SSR, this often breaks unless backend is reachable from Vercel runtime.
 - `/dashboard/cafe` role guard is client-side only (`useEffect` in layout). Server page fetch runs before redirect, which can leak unauthorized data if backend endpoint itself is not role-scoped.
 - Using localStorage means no server-readable auth in SSR. Any server-side personalized fetch cannot attach user token with current architecture.
 
@@ -59,7 +59,7 @@ Important nuance: these calls include Bearer token only if token exists in local
 ## 4) Deployment readiness
 
 ### Current blockers
-- Hardcoded backend origin (`http://localhost:8080`) in multiple files blocks cloud deployment.
+- Hardcoded backend origin (`<api-base-url>`) in multiple files blocks cloud deployment.
 - No centralized API client or environment-driven base URL.
 
 ### Recommended API base strategy (minimal)
@@ -125,6 +125,6 @@ Important nuance: these calls include Bearer token only if token exists in local
 
 ## D) Minimal changes to deploy frontend (Vercel-ready)
 1. Add `NEXT_PUBLIC_API_URL` in Vercel env vars.
-2. Replace all `http://localhost:8080` usages with env helper.
+2. Replace all `<api-base-url>` usages with env helper.
 3. Validate CORS on backend for Vercel frontend origin(s).
 4. Keep localStorage token for MVP, document security tradeoff.

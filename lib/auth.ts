@@ -2,6 +2,7 @@
  * Client-only auth helpers (JWT + role in localStorage).
  * Only call from browser code (Client Components / event handlers).
  */
+import { apiUrl } from "@/lib/apiBase";
 
 export const AUTH_TOKEN_KEY = "rescuEat_token";
 export const AUTH_ROLE_KEY = "rescuEat_role";
@@ -144,8 +145,6 @@ export async function readApiErrorMessage(res: Response): Promise<string> {
   return parseErrorFromText(text);
 }
 
-const AUTH_API = "https://rescureat-backend-production.up.railway.app";
-
 export type RegisterApiRole = "STUDENT" | "CAFE_OWNER";
 
 /**
@@ -161,7 +160,7 @@ export async function registerAccount(
   | { ok: true; loggedIn: false }
   | { ok: false; message: string }
 > {
-  const res = await fetch(`${AUTH_API}/register`, {
+  const res = await fetch(apiUrl("/api/auth/register"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password, role }),
@@ -198,7 +197,7 @@ export async function loginWithEmailPassword(
   email: string,
   password: string,
 ): Promise<{ ok: true; role: UserRole } | { ok: false; message: string }> {
-  const res = await fetch(`${AUTH_API}/login`, {
+  const res = await fetch(apiUrl("/api/auth/login"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

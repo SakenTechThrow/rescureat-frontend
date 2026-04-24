@@ -1,7 +1,8 @@
 import DealsBrowse from "@/components/DealsBrowse";
+import { apiUrl } from "@/lib/apiBase";
 
 async function getDeals(): Promise<unknown[]> {
-  const res = await fetch("http://localhost:8080/api/deals", { cache: "no-store" });
+  const res = await fetch(apiUrl("/api/deals"), { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch deals");
   return res.json();
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ReserveDealButton from "@/components/ReserveDealButton";
+import { apiUrl } from "@/lib/apiBase";
 
 type Deal = {
   id: number;
@@ -11,7 +12,7 @@ type Deal = {
 };
 
 async function getDeal(id: string): Promise<Deal> {
-  const res = await fetch(`http://localhost:8080/api/deals/${id}`, {
+  const res = await fetch(apiUrl(`/api/deals/${id}`), {
     cache: "no-store",
   });
 
