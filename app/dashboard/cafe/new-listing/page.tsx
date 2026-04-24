@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authHeaders, readApiErrorMessage } from "@/lib/auth";
+import { apiUrl } from "@/lib/apiBase";
 
 export default function NewListingPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function NewListingPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8080/api/deals", {
+      const res = await fetch(apiUrl("/api/deals"), {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify({

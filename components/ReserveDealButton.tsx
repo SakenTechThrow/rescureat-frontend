@@ -8,6 +8,7 @@ import {
   getStoredName,
   readApiErrorMessage,
 } from "@/lib/auth";
+import { apiUrl } from "@/lib/apiBase";
 
 type ReserveDealButtonProps = {
   dealId: number;
@@ -26,7 +27,7 @@ export default function ReserveDealButton({ dealId }: ReserveDealButtonProps) {
       const userName =
         getStoredName()?.trim() || getStoredEmail()?.trim() || "Guest";
 
-      const res = await fetch("http://localhost:8080/api/reservations", {
+      const res = await fetch(apiUrl("/api/reservations"), {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify({ dealId, userName }),

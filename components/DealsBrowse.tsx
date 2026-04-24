@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
+import { apiUrl } from "@/lib/apiBase";
 
 export type DealListItem = {
   id: number;
@@ -153,7 +154,7 @@ export default function DealsBrowse({ initialDeals }: DealsBrowseProps) {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         try {
-          const url = new URL("http://localhost:8080/api/deals/nearby");
+          const url = new URL(apiUrl("/api/deals/nearby"));
           url.searchParams.set("lat", String(lat));
           url.searchParams.set("lng", String(lng));
           url.searchParams.set("radiusKm", "5");
